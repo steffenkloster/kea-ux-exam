@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Admin dashboard for online library management">
+  <title>Admin Dashboard - Online Library</title>
+  <link rel="stylesheet" href="assets/css/normalize.css">
+  <link rel="stylesheet" href="assets/css/responsive.css">
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <!-- JS modules are deferred by default -->
+  <script type="module" src="assets/js/app.js"></script>
+  <script type="module" src="assets/js/admin.js"></script>
+</head>
+<body>
+  <!-- Header with navigation -->
+  <header>
+    <div class="container">
+      <div class="header-content">
+        <a href="index.html" class="logo" aria-label="Online Library Home">
+          <h1>
+            <img src="assets/images/logo.svg" alt="Online Library Logo" class="logo-image">
+          </h1>
+        </a>
+        
+        <button class="menu-toggle" aria-expanded="false" aria-controls="main-nav" aria-label="Toggle navigation menu">
+          <span class="menu-icon"></span>
+        </button>
+        
+        <nav id="main-nav" aria-label="Main navigation">
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="search.html">Search</a></li>
+            <li><a href="authors.html">Authors</a></li>
+            <li class="auth-required"><a href="account.html">My Account</a></li>
+            <li class="admin-only"><a href="admin.html" aria-current="page">Admin</a></li>
+            <li class="logout-btn"><button aria-label="Log out">Logout</button></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main content area -->
+  <main id="main-content">
+    <div class="container">
+      <!-- Admin dashboard header -->
+      <header class="admin-header">
+        <h2>Admin Dashboard</h2>
+        <p>Manage books, authors, and publishers in the online library system.</p>
+      </header>
+      
+      <!-- Loading state overlay -->
+      <div id="loader" class="loader-overlay" aria-live="polite" aria-busy="true">
+        <div class="loader">
+          <span class="sr-only">Loading content...</span>
+        </div>
+      </div>
+      
+      <!-- Notification boxes -->
+      <div id="error-box" class="notification error" role="alert" aria-live="assertive"></div>
+      <div id="success-box" class="notification success" role="status" aria-live="polite"></div>
+
+      <!-- Admin tabs navigation -->
+      <div class="admin-tabs">
+        <nav aria-label="Admin sections">
+          <ul role="tablist">
+            <li role="presentation">
+              <button 
+                id="tab-book-lookup" 
+                class="tab-btn active" 
+                role="tab" 
+                aria-selected="true" 
+                aria-controls="book-lookup-panel"
+              >
+                Book Lookup
+              </button>
+            </li>
+            <li role="presentation">
+              <button 
+                id="tab-add-book" 
+                class="tab-btn" 
+                role="tab" 
+                aria-selected="false" 
+                aria-controls="add-book-panel"
+              >
+                Add Book
+              </button>
+            </li>
+            <li role="presentation">
+              <button 
+                id="tab-add-author" 
+                class="tab-btn" 
+                role="tab" 
+                aria-selected="false" 
+                aria-controls="add-author-panel"
+              >
+                Add Author
+              </button>
+            </li>
+            <li role="presentation">
+              <button 
+                id="tab-add-publisher" 
+                class="tab-btn" 
+                role="tab" 
+                aria-selected="false" 
+                aria-controls="add-publisher-panel"
+              >
+                Add Publisher
+              </button>
+            </li>
+          </ul>
+        </nav>
+      </div>
+
+      <!-- Tab panels -->
+      <div class="admin-panels">
+        <!-- Book lookup panel -->
+        <section 
+          id="book-lookup-panel" 
+          class="admin-panel active" 
+          role="tabpanel" 
+          aria-labelledby="tab-book-lookup"
+        >
+          <h3>Book Lookup</h3>
+          <p>Search for a specific book to see details and loan history.</p>
+          
+          <div class="admin-search-container">
+            <form id="book-lookup-form" class="admin-form">
+              <div class="form-group">
+                <label for="book-id">Book ID:</label>
+                <div class="input-with-button">
+                  <input 
+                    type="number" 
+                    id="book-id" 
+                    name="book-id" 
+                    min="1" 
+                    required 
+                    placeholder="Enter book ID"
+                  >
+                  <button type="submit" class="btn btn-primary">Look Up</button>
+                </div>
+              </div>
+            </form>
+            
+            <div id="book-lookup-results" class="admin-results">
+              <!-- Book lookup results will be displayed here -->
+            </div>
+          </div>
+        </section>
+        
+        <!-- Add book panel -->
+        <section 
+          id="add-book-panel" 
+          class="admin-panel" 
+          role="tabpanel" 
+          aria-labelledby="tab-add-book" 
+          hidden
+        >
+          <h3>Add New Book</h3>
+          <p>Add a new book to the library database.</p>
+          
+          <form id="add-book-form" class="admin-form">
+            <div class="form-group">
+              <label for="book-title">Title:</label>
+              <input 
+                type="text" 
+                id="book-title" 
+                name="title" 
+                required 
+                placeholder="Enter book title"
+              >
+            </div>
+            
+            <div class="form-group">
+              <label for="book-author">Author:</label>
+              <select 
+                id="book-author" 
+                name="author_id" 
+                required
+              >
+                <option value="">Select an author</option>
+                <!-- Authors will be loaded dynamically -->
+              </select>
+              <div class="form-note">
+                Can't find the author? Add them in the "Add Author" tab first.
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label for="book-publisher">Publisher:</label>
+              <select 
+                id="book-publisher" 
+                name="publisher_id" 
+                required
+              >
+                <option value="">Select a publisher</option>
+                <!-- Publishers will be loaded dynamically -->
+              </select>
+              <div class="form-note">
+                Can't find the publisher? Add them in the "Add Publisher" tab first.
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label for="book-year">Publishing Year:</label>
+              <input 
+                type="number" 
+                id="book-year" 
+                name="publishing_year" 
+                required 
+                placeholder="Enter publishing year"
+                min="1000" 
+                max="2025"
+              >
+            </div>
+            
+            <div class="form-actions">
+              <button type="submit" class="btn btn-primary">Add Book</button>
+              <button type="reset" class="btn btn-secondary">Clear Form</button>
+            </div>
+          </form>
+        </section>
+        
+        <!-- Add author panel -->
+        <section 
+          id="add-author-panel" 
+          class="admin-panel" 
+          role="tabpanel" 
+          aria-labelledby="tab-add-author" 
+          hidden
+        >
+          <h3>Add New Author</h3>
+          <p>Add a new author to the library database.</p>
+          
+          <form id="add-author-form" class="admin-form">
+            <div class="form-group">
+              <label for="author-first-name">First Name:</label>
+              <input 
+                type="text" 
+                id="author-first-name" 
+                name="first_name" 
+                required 
+                placeholder="Enter author's first name"
+              >
+            </div>
+            
+            <div class="form-group">
+              <label for="author-last-name">Last Name:</label>
+              <input 
+                type="text" 
+                id="author-last-name" 
+                name="last_name" 
+                required 
+                placeholder="Enter author's last name"
+              >
+            </div>
+            
+            <div class="form-actions">
+              <button type="submit" class="btn btn-primary">Add Author</button>
+              <button type="reset" class="btn btn-secondary">Clear Form</button>
+            </div>
+          </form>
+        </section>
+        
+        <!-- Add publisher panel -->
+        <section 
+          id="add-publisher-panel" 
+          class="admin-panel" 
+          role="tabpanel" 
+          aria-labelledby="tab-add-publisher" 
+          hidden
+        >
+          <h3>Add New Publisher</h3>
+          <p>Add a new publisher to the library database.</p>
+          
+          <form id="add-publisher-form" class="admin-form">
+            <div class="form-group">
+              <label for="publisher-name">Publisher Name:</label>
+              <input 
+                type="text" 
+                id="publisher-name" 
+                name="name" 
+                required 
+                placeholder="Enter publisher name"
+              >
+            </div>
+            
+            <div class="form-actions">
+              <button type="submit" class="btn btn-primary">Add Publisher</button>
+              <button type="reset" class="btn btn-secondary">Clear Form</button>
+            </div>
+          </form>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer section -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>eLib</h3>
+          <p>Your destination for e-books.</p>
+        </div>
+        
+        <div class="footer-section">
+          <h3>Quick Links</h3>
+          <nav aria-label="Footer navigation">
+            <ul>
+              <li><a href="index.html">Home</a></li>
+              <li><a href="search.html">Search</a></li>
+              <li><a href="authors.html">Authors</a></li>
+              <li><a href="about.html">About</a></li>
+            </ul>
+          </nav>
+        </div>
+        
+        <div class="footer-section">
+          <h3>Contact</h3>
+          <address>
+            <p>Email: <a href="mailto:info@elib.net">info@elib.net</a></p>
+            <p>Phone: <a href="tel:+45 12 34 56 78">+45 12 34 56 78</a></p>
+          </address>
+        </div>
+      </div>
+      
+      <div class="copyright">
+        <p>&copy; 2025 eLib. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Book details template -->
+  <template id="book-details-template">
+    <div class="book-details">
+      <div class="book-details__image">
+        <img src="" alt="Book cover">
+      </div>
+      <div class="book-details__content">
+        <h4 class="book-details__title"></h4>
+        <p class="book-details__author"></p>
+        <div class="book-details__meta">
+          <p class="book-details__publisher"></p>
+          <p class="book-details__year"></p>
+        </div>
+      </div>
+    </div>
+    <div class="loan-history">
+      <h4>Loan History</h4>
+      <table class="loan-table">
+        <thead>
+          <tr>
+            <th>User ID</th>
+            <th>Loan Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Loan history will be inserted here -->
+        </tbody>
+      </table>
+      <p class="no-loans hidden">No loan history available for this book.</p>
+    </div>
+  </template>
+</body>
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Online Library - Browse and loan e-books">
+  <title>Online Library</title>
+  <link rel="stylesheet" href="assets/css/normalize.css">
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="stylesheet" href="assets/css/responsive.css">
+  <!-- JS modules are deferred by default -->
+  <script type="module" src="assets/js/app.js"></script>
+  <script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs" type="module"></script>
+</head>
+
+<body>
+  <!-- Header with navigation -->
+  <header>
+    <div class="container">
+      <div class="header-content">
+        <a href="index.html" class="logo" aria-label="Online Library Home">
+          <h1>
+            <img src="assets/images/logo.svg" alt="Online Library Logo" class="logo-image">
+          </h1>
+        </a>
+
+        <button class="menu-toggle" aria-expanded="false" aria-controls="main-nav" aria-label="Toggle navigation menu">
+          <span class="menu-icon"></span>
+        </button>
+
+        <nav id="main-nav" aria-label="Main navigation">
+          <ul>
+            <li><a href="index.html" aria-current="page">Home</a></li>
+            <li><a href="search.html">Search</a></li>
+            <li><a href="authors.html">Authors</a></li>
+            <li class="auth-required hidden"><a href="account.html">My Account</a></li>
+            <li class="admin-only hidden"><a href="admin.html">Admin</a></li>
+            <li class="login-btn"><a href="login.html">Login</a></li>
+            <li class="signup-btn"><a href="signup.html">Sign Up</a></li>
+            <li class="logout-btn hidden"><button aria-label="Log out">Logout</button></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main content area -->
+  <main id="main-content">
+    <div class="container">
+      <section class="hero">
+        <div class="hero-decorations">
+          <!-- Circles -->
+          <div class="decoration-element decoration-circle orange decoration-1"></div>
+          <div class="decoration-element decoration-circle light-orange decoration-2"></div>
+          <div class="decoration-element decoration-circle white decoration-3"></div>
+
+          <!-- Squares -->
+          <div class="decoration-element decoration-square orange decoration-4"></div>
+          <div class="decoration-element decoration-square light-orange decoration-5"></div>
+          <div class="decoration-element decoration-square white decoration-6"></div>
+
+          <!-- Triangles -->
+          <div class="decoration-element decoration-triangle orange decoration-7"></div>
+          <div class="decoration-element decoration-triangle light-orange decoration-8"></div>
+        </div>
+
+        <div class="hero-content">
+          <div class="animated-logo">
+            <dotlottie-player src="https://lottie.host/4d5a106d-72e4-4895-8afb-7807916277a8/dPKfktY4Re.lottie"
+              background="transparent" speed="1" loop autoplay></dotlottie-player>
+
+            <h1 class="h1-delayed">eLib</h1>
+          </div>
+
+          <h2>Discover Your Next <u>Favorite</u> Book</h2>
+          <!-- <a href="search.html" class="btn btn-primary">Explore Books</a> -->
+        </div>
+      </section>
+
+      <!-- Loading state overlay -->
+      <div id="loader" class="loader-overlay" aria-live="polite" aria-busy="true">
+        <div class="loader">
+          <span class="sr-only">Loading content...</span>
+        </div>
+      </div>
+
+      <!-- Notification boxes -->
+      <div id="error-box" class="notification error" role="alert" aria-live="assertive"></div>
+      <div id="success-box" class="notification success" role="status" aria-live="polite"></div>
+
+      <!-- Featured books section -->
+      <section class="featured-books" aria-labelledby="featured-heading">
+        <h2 id="featured-heading">Featured Books</h2>
+        <div class="book-grid" id="featured-books">
+          <!-- Books will be loaded dynamically here -->
+          <p class="loading-placeholder">Loading books...</p>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Footer section -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>eLib</h3>
+          <p>Your destination for e-books.</p>
+        </div>
+
+        <div class="footer-section">
+          <h3>Quick Links</h3>
+          <nav aria-label="Footer navigation">
+            <ul>
+              <li><a href="index.html">Home</a></li>
+              <li><a href="search.html">Search</a></li>
+              <li><a href="authors.html">Authors</a></li>
+              <li><a href="about.html">About</a></li>
+            </ul>
+          </nav>
+        </div>
+
+        <div class="footer-section">
+          <h3>Contact</h3>
+          <address>
+            <p>Email: <a href="mailto:info@elib.net">info@elib.net</a></p>
+            <p>Phone: <a href="tel:+45 12 34 56 78">+45 12 34 56 78</a></p>
+          </address>
+        </div>
+      </div>
+
+      <div class="copyright">
+        <p>&copy; 2025 eLib. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <template id="book-card-template">
+    <article class="book-card">
+      <!-- <img class="book-card__image" loading="lazy" src="" alt=""> -->
+      <div class="book-card__content">
+        <h3 class="book-card__title">
+          <a href="" aria-label=""></a>
+        </h3>
+        <p class="book-card__author"></p>
+        <p class="book-card__details">
+          <span class="book-card__year"></span>
+          <span class="book-card__publisher"></span>
+        </p>
+        <div class="book-card__actions">
+          <a href="">
+            <button class="btn btn-secondary">Details</button>
+          </a>
+          <!-- Loan button will be added conditionally -->
+        </div>
+      </div>
+    </article>
+  </template>
+</body>
+
+</html>

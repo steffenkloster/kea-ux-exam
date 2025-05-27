@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="View book details and loan e-books from our online library">
+  <title>Book Details - Online Library</title>
+  <link rel="stylesheet" href="assets/css/normalize.css">
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="stylesheet" href="assets/css/responsive.css">
+  <!-- JS modules are deferred by default -->
+  <script type="module" src="assets/js/app.js"></script>
+  <script type="module" src="assets/js/author-details.js"></script>
+</head>
+
+<body>
+  <!-- Header with navigation -->
+  <header>
+    <div class="container">
+      <div class="header-content">
+        <a href="index.html" class="logo" aria-label="Online Library Home">
+          <h1>
+            <img src="assets/images/logo.svg" alt="Online Library Logo" class="logo-image">
+          </h1>
+        </a>
+
+        <button class="menu-toggle" aria-expanded="false" aria-controls="main-nav" aria-label="Toggle navigation menu">
+          <span class="menu-icon"></span>
+        </button>
+
+        <nav id="main-nav" aria-label="Main navigation">
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="search.html">Search</a></li>
+            <li><a href="authors.html">Authors</a></li>
+            <li class="auth-required hidden"><a href="account.html">My Account</a></li>
+            <li class="admin-only hidden"><a href="admin.html">Admin</a></li>
+            <li class="login-btn"><a href="login.html">Login</a></li>
+            <li class="signup-btn"><a href="signup.html">Sign Up</a></li>
+            <li class="logout-btn hidden"><button aria-label="Log out">Logout</button></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main content area -->
+  <main id="main-content">
+    <div class="container">
+      <!-- Loading state overlay -->
+      <div id="loader" class="loader-overlay" aria-live="polite" aria-busy="true">
+        <div class="loader">
+          <span class="sr-only">Loading content...</span>
+        </div>
+      </div>
+
+      <!-- Notification boxes -->
+      <div id="error-box" class="notification error" role="alert" aria-live="assertive"></div>
+      <div id="success-box" class="notification success" role="status" aria-live="polite"></div>
+
+      <div class="breadcrumbs-container">
+        <!-- Back button -->
+        <div class="back-link">
+          <a href="javascript:history.back()" class="btn-link">
+            <span aria-hidden="true">←</span> Back
+          </a>
+        </div>
+
+        <!-- Breadcrumbs navigation -->
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <ol vocab="https://schema.org/" typeof="BreadcrumbList">
+            <li property="itemListElement" typeof="ListItem">
+              <a property="item" typeof="WebPage" href="/authors.html">
+                <span property="name">Authors</span>
+              </a>
+              <meta property="position" content="1">
+              <span class="separator" aria-hidden="true">→</span>
+            </li>
+            <li property="itemListElement" typeof="ListItem">
+              <span property="name" class="current">...</span>
+              <meta property="position" content="2">
+            </li>
+          </ol>
+        </nav>
+      </div>
+
+      <section class="book-details-container">
+        <!-- Back to results link -->
+
+        <div id="author-details" aria-live="polite">
+          <!-- Book details will be loaded dynamically here -->
+          <p class="loading-placeholder">Loading author details...</p>
+
+          <div class="author-books">
+            <h1>Books by <span id="author-name-placeholder">...</span></h1>
+            <div class="book-grid" id="author-books">
+
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Footer section -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>eLib</h3>
+          <p>Your destination for e-books.</p>
+        </div>
+
+        <div class="footer-section">
+          <h3>Quick Links</h3>
+          <nav aria-label="Footer navigation">
+            <ul>
+              <li><a href="index.html">Home</a></li>
+              <li><a href="search.html">Search</a></li>
+              <li><a href="authors.html">Authors</a></li>
+              <li><a href="about.html">About</a></li>
+            </ul>
+          </nav>
+        </div>
+
+        <div class="footer-section">
+          <h3>Contact</h3>
+          <address>
+            <p>Email: <a href="mailto:info@elib.net">info@elib.net</a></p>
+            <p>Phone: <a href="tel:+45 12 34 56 78">+45 12 34 56 78</a></p>
+          </address>
+        </div>
+      </div>
+
+      <div class="copyright">
+        <p>&copy; 2025 eLib. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <template id="book-card-template">
+    <article class="author-card">
+      <div class="book-card__content">
+        <h3 class="book-card__title">
+          <a href="" aria-label=""></a>
+        </h3>
+
+        <div class="book-card__details"></div>
+      </div>
+    </article>
+  </template>
+</body>
+
+</html>

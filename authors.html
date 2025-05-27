@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Search books in our online library collection">
+  <title>Search Books - Online Library</title>
+  <link rel="stylesheet" href="assets/css/normalize.css">
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="stylesheet" href="assets/css/responsive.css">
+  <!-- JS modules are deferred by default -->
+  <script type="module" src="assets/js/app.js"></script>
+  <script type="module" src="assets/js/authors.js"></script>
+</head>
+
+<body>
+  <!-- Header with navigation -->
+  <header>
+    <div class="container">
+      <div class="header-content">
+        <a href="index.html" class="logo" aria-label="Online Library Home">
+          <h1>
+            <img src="assets/images/logo.svg" alt="Online Library Logo" class="logo-image">
+          </h1>
+        </a>
+
+        <button class="menu-toggle" aria-expanded="false" aria-controls="main-nav" aria-label="Toggle navigation menu">
+          <span class="menu-icon"></span>
+        </button>
+
+        <nav id="main-nav" aria-label="Main navigation">
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="search.html">Search</a></li>
+            <li><a href="authors.html" aria-current="page">Authors</a></li>
+            <li class="auth-required hidden"><a href="account.html">My Account</a></li>
+            <li class="admin-only hidden"><a href="admin.html">Admin</a></li>
+            <li class="login-btn"><a href="login.html">Login</a></li>
+            <li class="signup-btn"><a href="signup.html">Sign Up</a></li>
+            <li class="logout-btn hidden"><button aria-label="Log out">Logout</button></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main content area -->
+  <main id="main-content">
+    <div class="container">
+      <!-- Loading state overlay -->
+      <div id="loader" class="loader-overlay" aria-live="polite" aria-busy="true">
+        <div class="loader">
+          <span class="sr-only">Loading content...</span>
+        </div>
+      </div>
+
+      <!-- Notification boxes -->
+      <div id="error-box" class="notification error" role="alert" aria-live="assertive"></div>
+      <div id="success-box" class="notification success" role="status" aria-live="polite"></div>
+
+      <!-- Search section -->
+      <section class="search-container">
+        <h2>Authors</h2>
+
+        <!-- <form id="search-form" class="search-form" role="search">
+          <div class="search-input-container">
+            <input type="search" id="search-input" name="search" placeholder="Enter title, author, or keyword..."
+              aria-label="Search for books by title or keyword" autocomplete="off">
+            <button type="submit" class="btn btn-primary" aria-label="Search">
+              Search
+            </button>
+          </div>
+        </form> -->
+
+        <div class="authors-list">
+          <div id="author-list-container" class="book-grid">
+            
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Footer section -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>eLib</h3>
+          <p>Your destination for e-books.</p>
+        </div>
+
+        <div class="footer-section">
+          <h3>Quick Links</h3>
+          <nav aria-label="Footer navigation">
+            <ul>
+              <li><a href="index.html">Home</a></li>
+              <li><a href="search.html">Search</a></li>
+              <li><a href="authors.html">Authors</a></li>
+              <li><a href="about.html">About</a></li>
+            </ul>
+          </nav>
+        </div>
+
+        <div class="footer-section">
+          <h3>Contact</h3>
+          <address>
+            <p>Email: <a href="mailto:info@elib.net">info@elib.net</a></p>
+            <p>Phone: <a href="tel:+45 12 34 56 78">+45 12 34 56 78</a></p>
+          </address>
+        </div>
+      </div>
+
+      <div class="copyright">
+        <p>&copy; 2025 eLib. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <template id="author-card-template">
+    <article class="author-card">
+      <div class="author-card__content">
+        <h3 class="author-card__title">
+          <a href="" aria-label="">aaa</a>
+        </h3>
+
+        <div class="author-card__details">hey</div>
+      </div>
+    </article>
+  </template>
+</body>
+
+</html>
