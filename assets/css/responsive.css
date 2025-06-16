@@ -103,7 +103,7 @@
 
   nav {
     position: fixed;
-    top: 60px;
+    top: 0px;
     left: 0;
     width: 100%;
     background-color: var(--neutral-white);
