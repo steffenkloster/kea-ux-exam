@@ -379,6 +379,7 @@ nav {
   background: none;
   border: none;
   padding: var(--spacing-xs);
+  z-index: 2000;
 
   & .menu-icon {
     display: block;
